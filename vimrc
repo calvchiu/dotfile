@@ -31,6 +31,7 @@ set shiftwidth=2
 set smartindent
 set autoindent
 set scrolloff=5
+set bs=indent,eol,start
 
 "CtrlP
 let g:ctrlp_map = '<c-p>'
