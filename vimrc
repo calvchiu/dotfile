@@ -32,6 +32,8 @@ set smartindent
 set autoindent
 set scrolloff=5
 set bs=indent,eol,start
+set history=1000
+set undolevels=1000
 
 "CtrlP
 let g:ctrlp_map = '<c-p>'
@@ -42,13 +44,28 @@ let g:airline_powerline_fonts=1
 "supertab
 let g:SuperTabDefaultCompletionType="<c-n>"
 
+"get better at vim
+map <left>  <nop>
+map <down>  <nop>
+map <up>    <nop>
+map <right> <nop>
+
 "Remap cycle between splits
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
+"more natural cursor movement
+nnoremap j gj
+nnoremap k gk
+
+"reduce vim commands by two keystrokes
+nnoremap ; :
+
 "define split behavior
 set splitbelow
 set splitright
 
+"clear search highlights with ,/
+nmap <silent> ,/ :nohlsearch<CR>
