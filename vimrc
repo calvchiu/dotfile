@@ -18,6 +18,7 @@ call vundle#end()            " required
 filetype plugin indent on    " required
 
 "visual and format
+set t_Co=256
 colorscheme hybrid
 syntax on
 set encoding=utf-8
