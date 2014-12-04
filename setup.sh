@@ -1,4 +1,6 @@
 #!/bin/bash
+sudo apt-get install git
+git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 wget https://github.com/Lokaltog/powerline/raw/develop/font/PowerlineSymbols.otf
 wget https://github.com/Lokaltog/powerline/raw/develop/font/10-powerline-symbols.conf

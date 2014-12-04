@@ -13,6 +13,7 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/syntastic'
 "Plugin 'terryma/vim-multiple-cursors'
 Plugin 'ervandew/supertab'
+Plugin 'edkolev/tmuxline.vim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
