@@ -43,6 +43,7 @@ let g:ctrlp_map = '<c-p>'
 let g:netrw_liststyle=3
 "airline
 let g:airline_powerline_fonts=1
+let g:airline_theme='base16'
 "supertab
 let g:SuperTabDefaultCompletionType="<c-n>"
 
