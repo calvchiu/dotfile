@@ -14,6 +14,7 @@ Plugin 'scrooloose/syntastic'
 "Plugin 'terryma/vim-multiple-cursors'
 Plugin 'ervandew/supertab'
 Plugin 'edkolev/tmuxline.vim'
+Plugin 'Townk/vim-autoclose'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -32,6 +33,7 @@ set number
 set shiftwidth=2
 set smartindent
 set autoindent
+"set cindent
 set scrolloff=5
 set bs=indent,eol,start
 set history=1000
@@ -72,3 +74,6 @@ set splitright
 
 "clear search highlights with ,/
 nmap <silent> ,/ :nohlsearch<CR>
+
+"Auto indent for function {}
+inoremap {<CR> {<CR>}<C-o>O
