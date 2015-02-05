@@ -41,6 +41,7 @@ set undolevels=1000
 
 "CtrlP
 let g:ctrlp_map = '<c-p>'
+let g:ctrlp_working_path_mode='ra'
 "netrw
 let g:netrw_liststyle=3
 "airline
@@ -48,6 +49,14 @@ let g:airline_powerline_fonts=1
 let g:airline_theme='base16'
 "supertab
 let g:SuperTabDefaultCompletionType="<c-n>"
+"nerdtree
+"  switch between windows with <C-w>w
+map <F2> :NERDTreeToggle<CR>
+map <F3> :NERDTreeFind<CR>
+let NERDTreeShowHidden=1
+let NERDTreeChDirMode=2
+autocmd VimEnter * NERDTree | wincmd p
+"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 "get better at vim
 map <left>  <nop>
