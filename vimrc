@@ -31,6 +31,7 @@ set mouse=a
 set laststatus=2
 set number
 set shiftwidth=2
+set tabstop=2
 set smartindent
 set autoindent
 "set cindent
@@ -56,7 +57,7 @@ map <F3> :NERDTreeFind<CR>
 let NERDTreeShowHidden=1
 let NERDTreeChDirMode=2
 autocmd VimEnter * NERDTree | wincmd p
-"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 "get better at vim
 map <left>  <nop>
