@@ -1,4 +1,5 @@
 set nocompatible
+	res.render('login', {title: 'login'});
 filetype off
 
 "set the runtime path to include Vundle and initialize
@@ -41,7 +42,8 @@ set history=1000
 set undolevels=1000
 
 "CtrlP
-let g:ctrlp_map = '<c-p>'
+"let g:ctrlp_map = '<c-p>'
+map <C-P> :CtrlPMRUFiles<CR>
 let g:ctrlp_working_path_mode='ra'
 "netrw
 let g:netrw_liststyle=3
