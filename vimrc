@@ -39,7 +39,8 @@ set scrolloff=5
 set bs=indent,eol,start
 set history=1000
 set undolevels=1000
-
+set showcmd
+set path=.,,**
 "CtrlP
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_working_path_mode='ra'
@@ -56,7 +57,7 @@ map <F2> :NERDTreeToggle<CR>
 map <F3> :NERDTreeFind<CR>
 let NERDTreeShowHidden=1
 let NERDTreeChDirMode=2
-autocmd VimEnter * NERDTree | wincmd p
+"autocmd VimEnter * NERDTree | wincmd p
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 "get better at vim
