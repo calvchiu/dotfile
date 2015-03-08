@@ -29,28 +29,41 @@ set hlsearch
 set incsearch
 set mouse=a
 set laststatus=2
-set number
+set relativenumber
 set shiftwidth=2
 set tabstop=2
 set smartindent
 set autoindent
-"set cindent
 set scrolloff=5
 set bs=indent,eol,start
 set history=1000
 set undolevels=1000
 set showcmd
 set path=.,,**
+set cursorline
+
+"syntax
+autocmd BufNewFile,BufReadPost *.ru set filetype=ruby
+
+"leader mapping
+let mapleader = "\<Space>"
+nnoremap <leader>r :source $MYVIMRC<CR>
+nnoremap <leader>/ :nohlsearch<CR>
+
 "CtrlP
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_working_path_mode='ra'
+
 "netrw
 let g:netrw_liststyle=3
+
 "airline
 let g:airline_powerline_fonts=1
 let g:airline_theme='base16'
+
 "supertab
 let g:SuperTabDefaultCompletionType="<c-n>"
+
 "nerdtree
 "  switch between windows with <C-w>w
 map <F2> :NERDTreeToggle<CR>
@@ -76,8 +89,12 @@ nnoremap <C-H> <C-W><C-H>
 nnoremap j gj
 nnoremap k gk
 
-"reduce vim commands by two keystrokes
-nnoremap ; :
+"relative nu for normal mode movement
+autocmd InsertEnter * :set number
+autocmd InsertLeave * :set relativenumber
+
+"[optional] reduce vim commands by two keystrokes
+"nnoremap ; :
 
 "define split behavior
 set splitbelow
@@ -92,3 +109,6 @@ inoremap {<CR> {<CR>}<C-o>O
 "display indentation and eol
 set list
 set listchars=tab:▸\ ,eol:¬
+
+"removes trailing whitespace on :w
+autocmd BufWritePre * :s/\s\+$//e
