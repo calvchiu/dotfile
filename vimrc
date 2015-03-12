@@ -8,6 +8,7 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'bling/vim-airline'
+"Plugin 'itchyny/lightline.vim'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/syntastic'
@@ -39,6 +40,7 @@ set bs=indent,eol,start
 set history=1000
 set undolevels=1000
 set showcmd
+set showmatch
 set path=.,,**
 set cursorline
 
@@ -47,8 +49,17 @@ autocmd BufNewFile,BufReadPost *.ru set filetype=ruby
 
 "leader mapping
 let mapleader = "\<Space>"
+"[optional] customize timeout(in milliseconds) for mapped keysequences
+"set timeoutlen=500
 nnoremap <leader>r :source $MYVIMRC<CR>
+nnoremap <leader>w :w<CR>
 nnoremap <leader>/ :nohlsearch<CR>
+
+"butter fingers
+command W w
+command Q q
+command Wq wq
+command WQ wq
 
 "CtrlP
 let g:ctrlp_map = '<c-p>'
@@ -60,6 +71,12 @@ let g:netrw_liststyle=3
 "airline
 let g:airline_powerline_fonts=1
 let g:airline_theme='base16'
+let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#tabline#left_sep=''
+let g:airline#extensions#tabline#left_alt_sep='|'
+let g:airline#extensions#tabline#right_sep=''
+let g:airline#extensions#tabline#right_alt_sep='|'
+let g:airline_left_sep=''
 
 "supertab
 let g:SuperTabDefaultCompletionType="<c-n>"
@@ -92,6 +109,9 @@ nnoremap k gk
 "relative nu for normal mode movement
 autocmd InsertEnter * :set number
 autocmd InsertLeave * :set relativenumber
+
+"exit insert mode
+inoremap jj <esc>
 
 "[optional] reduce vim commands by two keystrokes
 "nnoremap ; :
