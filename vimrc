@@ -16,6 +16,7 @@ Plugin 'scrooloose/syntastic'
 Plugin 'ervandew/supertab'
 Plugin 'edkolev/tmuxline.vim'
 Plugin 'Townk/vim-autoclose'
+Plugin 'Valloric/YouCompleteMe'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -54,6 +55,7 @@ let mapleader = "\<Space>"
 nnoremap <leader>r :source $MYVIMRC<CR>
 nnoremap <leader>w :w<CR>
 nnoremap <leader>/ :nohlsearch<CR>
+nnoremap <leader>n :NERDTreeToggle<CR>
 
 "butter fingers
 command W w
@@ -67,6 +69,15 @@ let g:ctrlp_working_path_mode='ra'
 
 "netrw
 let g:netrw_liststyle=3
+
+"syntatic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslneFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntatis_check_on_wq = 0
 
 "airline
 let g:airline_powerline_fonts=1
@@ -131,4 +142,4 @@ set list
 set listchars=tab:▸\ ,eol:¬
 
 "removes trailing whitespace on :w
-autocmd BufWritePre * :s/\s\+$//e
+autocmd BufWritePre * :%s/\s\+$//e
