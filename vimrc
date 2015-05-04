@@ -14,7 +14,7 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/syntastic'
 "Plugin 'terryma/vim-multiple-cursors'
 Plugin 'ervandew/supertab'
-Plugin 'edkolev/tmuxline.vim'
+"Plugin 'edkolev/tmuxline.vim'
 Plugin 'Townk/vim-autoclose'
 Plugin 'Valloric/YouCompleteMe'
 
@@ -137,9 +137,24 @@ nmap <silent> ,/ :nohlsearch<CR>
 "Auto indent for function {}
 inoremap {<CR> {<CR>}<C-o>O
 
-"display indentation and eol
-set list
-set listchars=tab:▸\ ,eol:¬
+"[optional]display indentation and eol
+"set list
+"set listchars=tab:▸\ ,eol:¬
 
 "removes trailing whitespace on :w
 autocmd BufWritePre * :%s/\s\+$//e
+
+
+" Open cursor at last position
+if has("autocmd")
+	autocmd BufReadPost *
+				\ if line("'\"") > 0 && line ("'\"") <= line("$") |
+				\   exe "normal g'\"" |
+				\ endif
+endif
+
+"[Alternative] Open cursors at last position
+"Although the main purpose is to load the folds
+"of the document
+"au BufWinLeave * mkview
+"au BufWinEnter * silent loadview
