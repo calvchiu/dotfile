@@ -36,7 +36,7 @@ set shiftwidth=2
 set tabstop=2
 set smartindent
 set autoindent
-set scrolloff=5
+set scrolloff=50
 set bs=indent,eol,start
 set history=1000
 set undolevels=1000
@@ -44,6 +44,8 @@ set showcmd
 set showmatch
 set path=.,,**
 set cursorline
+set breakindent
+set showbreak=¬
 
 "syntax
 autocmd BufNewFile,BufReadPost *.ru set filetype=ruby
