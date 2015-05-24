@@ -23,7 +23,12 @@ filetype plugin indent on    " required
 
 "visual and format
 set t_Co=256
-colorscheme hybrid
+
+try
+	colorscheme hybrid
+catch
+endtry
+
 syntax on
 set encoding=utf-8
 set guifont=Inconsolata\ for\ Powerline:h12
@@ -54,9 +59,9 @@ autocmd BufNewFile,BufReadPost *.ru set filetype=ruby
 let mapleader = "\<Space>"
 "[optional] customize timeout(in milliseconds) for mapped keysequences
 "set timeoutlen=500
+nnoremap <leader><leader> :nohlsearch<CR>
 nnoremap <leader>r :source $MYVIMRC<CR>
 nnoremap <leader>w :w<CR>
-nnoremap <leader>/ :nohlsearch<CR>
 nnoremap <leader>n :NERDTreeToggle<CR>
 
 "butter fingers
