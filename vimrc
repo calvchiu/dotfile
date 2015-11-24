@@ -11,12 +11,18 @@ Plugin 'bling/vim-airline'
 "Plugin 'itchyny/lightline.vim'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'kien/ctrlp.vim'
-Plugin 'scrooloose/syntastic'
+Plugin 'tpope/vim-fugitive'
+"Plugin 'scrooloose/syntastic'
 "Plugin 'terryma/vim-multiple-cursors'
 Plugin 'ervandew/supertab'
 "Plugin 'edkolev/tmuxline.vim'
 Plugin 'Townk/vim-autoclose'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'tpope/vim-surround'
+Plugin 'rking/ag.vim'
+Plugin 'myusuf3/numbers.vim'
+Plugin 'majutsushi/tagbar'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -40,8 +46,10 @@ set relativenumber
 set shiftwidth=2
 set tabstop=2
 set smartindent
+set ignorecase
+set smartcase
 set autoindent
-set scrolloff=50
+set scrolloff=3
 set bs=indent,eol,start
 set history=1000
 set undolevels=1000
@@ -51,6 +59,10 @@ set path=.,,**
 set cursorline
 set breakindent
 set showbreak=¬
+set hidden
+set autoread
+
+
 
 "syntax
 autocmd BufNewFile,BufReadPost *.ru set filetype=ruby
@@ -70,31 +82,47 @@ command Q q
 command Wq wq
 command WQ wq
 
+"buffer management
+nnoremap <leader>l :bnext<CR>
+nnoremap <leader>h :bprevious<CR>
+nnoremap <leader>b :ls<CR>
+
+
 "CtrlP
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_working_path_mode='ra'
+nnoremap <leader>p :CtrlPTag<cr> schemas
+
+"tagbar
+nnoremap <Leader>t :TagbarToggle<CR>
 
 "netrw
 let g:netrw_liststyle=3
 
 "syntatic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslneFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntatis_check_on_wq = 0
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslneFlag()}
+"set statusline+=%*
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntatis_check_on_wq = 0
 
 "airline
 let g:airline_powerline_fonts=1
-let g:airline_theme='base16'
+let g:airline_theme='bubblegum'
 let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#tabline#left_sep=''
 let g:airline#extensions#tabline#left_alt_sep='|'
 let g:airline#extensions#tabline#right_sep=''
 let g:airline#extensions#tabline#right_alt_sep='|'
 let g:airline_left_sep=''
+let g:airline_right_sep=''
+let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#tagbar#enabled = 1
+let g:airline#extensions#tagbar#flags = ''
+"let g:airline#extensions#syntastic#enabled = 1
+let g:airline_powerline_fonts=0
 
 "supertab
 let g:SuperTabDefaultCompletionType="<c-n>"
