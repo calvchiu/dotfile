@@ -109,6 +109,19 @@ let g:netrw_liststyle=3
 "let g:syntatis_check_on_wq = 0
 
 "airline
+let g:airline_mode_map = {
+	\ '__' : '-',
+	\ 'n' : 'N',
+	\ 'i' : 'I',
+	\ 'R' : 'R',
+	\ 'c' : 'C',
+	\ 'v' : 'V',
+	\ 'V' : 'V',
+	\ 'x' : 'V',
+	\ 's' : 'S',
+	\ 'S' : 'S',
+	\ 'X' : 'S',
+	\ }
 let g:airline_powerline_fonts=1
 let g:airline_theme='bubblegum'
 let g:airline#extensions#tabline#enabled=1
