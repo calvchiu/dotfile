@@ -3,3 +3,8 @@
 	name = calvin chiu
 [core]
 	editor = vim
+[alias]
+	lg = "log --pretty=format:'%C(yellow)%h %Cred%cr %Cblue%an%Cgreen%d %Creset%s' --date=short --graph"
+	lgs = "log --pretty=format:'%C(yellow)%h %Cred%ad %Cblue%an%Cgreen%d %Creset%s' --date=short"
+	lgp = "log --pretty=format:'%C(yellow)%h %Cred%cr %Cblue%an%Cgreen%d %Creset%s' --date=short --graph"
+	lgl = "log --pretty=format:'%C(yellow)%h %Cred%cr %Cblue%an%Cgreen%d %Creset%s' --date=short"
