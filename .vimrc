@@ -31,7 +31,8 @@ filetype plugin indent on    " required
 set t_Co=256
 
 try
-	colorscheme hybrid
+	"colorscheme hybrid
+	colorscheme solarized
 catch
 endtry
 
@@ -46,6 +47,7 @@ set relativenumber
 set shiftwidth=2
 set tabstop=2
 set smartindent
+set expandtab
 set ignorecase
 set smartcase
 set autoindent
@@ -56,11 +58,14 @@ set undolevels=1000
 set showcmd
 set showmatch
 set path=.,,**
-set cursorline
+"set cursorline
 set breakindent
 set showbreak=¬
 set hidden
 set autoread
+set directory=~/.vim/swp//
+set clipboard=unnamed
+set nowrap
 
 
 
@@ -87,11 +92,14 @@ nnoremap <leader>l :bnext<CR>
 nnoremap <leader>h :bprevious<CR>
 nnoremap <leader>b :ls<CR>
 
+"ctags
+"set autochdir
+set tags=tags;,./tags
 
 "CtrlP
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_working_path_mode='ra'
-nnoremap <leader>p :CtrlPTag<cr> schemas
+nnoremap <leader>p :CtrlPBuffer<cr>
 
 "tagbar
 nnoremap <Leader>t :TagbarToggle<CR>
@@ -122,7 +130,6 @@ let g:airline_mode_map = {
 	\ 'S' : 'S',
 	\ 'X' : 'S',
 	\ }
-let g:airline_powerline_fonts=1
 let g:airline_theme='bubblegum'
 let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#tabline#left_sep=''
@@ -206,3 +213,9 @@ endif
 "of the document
 "au BufWinLeave * mkview
 "au BufWinEnter * silent loadview
+
+"osx - change cursor depending on model
+if $TERM_PROGRAM =~ "iTerm"
+  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif" "
