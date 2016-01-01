@@ -37,6 +37,7 @@ catch
 endtry
 
 syntax on
+set background=dark
 set encoding=utf-8
 set guifont=Inconsolata\ for\ Powerline:h12
 set hlsearch
