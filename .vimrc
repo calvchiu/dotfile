@@ -110,6 +110,10 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_working_path_mode='ra'
 nnoremap <leader>p :CtrlPBuffer<cr>
 
+"gitgutter
+"let g:gitgutter_eager = 0
+let g:gitgutter_realtime = 0
+
 "tagbar
 nnoremap <Leader>t :TagbarToggle<CR>
 let g:tagbar_type_ruby = {
