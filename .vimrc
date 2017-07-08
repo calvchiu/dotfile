@@ -8,14 +8,13 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'edkolev/tmuxline.vim'
 Plugin 'christoomey/vim-tmux-navigator'
-"Plugin 'itchyny/lightline.vim'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'kien/ctrlp.vim'
 Plugin 'tpope/vim-fugitive'
 "Plugin 'scrooloose/syntastic'
-"Plugin 'terryma/vim-multiple-cursors'
 Plugin 'ervandew/supertab'
 Plugin 'Townk/vim-autoclose'
 Plugin 'Valloric/YouCompleteMe'
@@ -67,7 +66,6 @@ set breakindent
 set showbreak=¬
 set hidden
 set autoread
-set directory=~/.vim/swp//
 set clipboard=unnamed
 set nowrap
 
