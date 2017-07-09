@@ -12,7 +12,6 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'edkolev/tmuxline.vim'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'flazz/vim-colorschemes'
-Plugin 'kien/ctrlp.vim'
 Plugin 'tpope/vim-fugitive'
 "Plugin 'scrooloose/syntastic'
 Plugin 'ervandew/supertab'
@@ -21,9 +20,13 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-surround'
 Plugin 'rking/ag.vim'
+Plugin 'junegunn/fzf.vim'
 Plugin 'myusuf3/numbers.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'easymotion/vim-easymotion'
+Plugin 'tpope/vim-unimpaired'
+
+set rtp+=~/.fzf
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -32,9 +35,9 @@ filetype plugin indent on    " required
 set t_Co=256
 
 try
-	"colorscheme hybrid
-	"colorscheme molokai
-	colorscheme solarized
+  "colorscheme hybrid
+  colorscheme molokai
+  "colorscheme solarized
 catch
 endtry
 
@@ -42,10 +45,10 @@ syntax on
 set background=dark
 set encoding=utf-8
 set guifont=Inconsolata\ for\ Powerline:h12
-set hlsearch
 set incsearch
 set mouse=a
 set laststatus=2
+set number
 set relativenumber
 set shiftwidth=2
 set tabstop=2
@@ -61,14 +64,15 @@ set undolevels=1000
 set showcmd
 set showmatch
 set path=.,,**
-"set cursorline
 set breakindent
 set showbreak=¬
 set hidden
 set autoread
-set clipboard=unnamed
+set clipboard=unnamedplus
 set nowrap
-
+set foldenable
+set foldmethod=indent
+set foldlevel=1
 
 
 "syntax
@@ -103,10 +107,32 @@ nnoremap <leader>h :bprevious<CR>
 "set autochdir
 set tags=tags;,./tags
 
-"CtrlP
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_working_path_mode='ra'
-nnoremap <leader>p :CtrlPBuffer<cr>
+"fzf.vim
+"let g:fzf_layout = { 'right': '~40%' }
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
+if executable('fzf')
+  "let $FZF_DEFAULT_COMMAND = 'ag -l -g --ignore=tags ""'
+  nnoremap <c-p> :FZF -m<cr>
+  nnoremap <leader>p :Buffers<cr>
+  nnoremap <leader>/ :Ag<cr>
+  let g:fzf_layout = { 'down': '40%' }
+    "fzf buggy with tmux
+    "let g:fzf_layout = {}
+  let g:fzf_buffers_jump = 1
+end
 
 "gitgutter
 "let g:gitgutter_eager = 0
@@ -210,11 +236,17 @@ nnoremap j gj
 nnoremap k gk
 
 "relative nu for normal mode movement
-autocmd InsertEnter * :set number
-autocmd InsertLeave * :set relativenumber
+"autocmd InsertEnter * :set number
+"autocmd InsertLeave * :set relativenumber
 
 "exit insert mode
 inoremap jj <esc>
+inoremap jk <esc>
+
+"find files with wildmenu
+"set path=$PWD/**
+set wildmenu
+set wildmode=list:longest,full"
 
 "[optional] reduce vim commands by two keystrokes
 "nnoremap ; :
@@ -256,3 +288,9 @@ if $TERM_PROGRAM =~ "iTerm"
   let &t_SI = "\<Esc>]50;CursorShape=1\x7"
   let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 endif" "
+
+if executable('ag')
+  " Note we extract the column as well as the file and line number
+  set grepprg=ag\ --nogroup\ --nocolor\ --column
+  set grepformat=%f:%l:%c%m
+endif"
