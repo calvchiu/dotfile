@@ -1,35 +1,32 @@
 set nocompatible
 filetype off
 
-"set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+call plug#begin('~/.vim/plugged')
 
-Plugin 'gmarik/Vundle.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'bling/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'edkolev/tmuxline.vim'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'flazz/vim-colorschemes'
-Plugin 'tpope/vim-fugitive'
-"Plugin 'scrooloose/syntastic'
-Plugin 'ervandew/supertab'
-Plugin 'Townk/vim-autoclose'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'tpope/vim-surround'
-Plugin 'rking/ag.vim'
-Plugin 'junegunn/fzf.vim'
-Plugin 'myusuf3/numbers.vim'
-Plugin 'majutsushi/tagbar'
-Plugin 'easymotion/vim-easymotion'
-Plugin 'tpope/vim-unimpaired'
+Plug 'scrooloose/nerdtree'
+Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'edkolev/tmuxline.vim'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'flazz/vim-colorschemes'
+Plug 'tpope/vim-fugitive'
+"Plug 'scrooloose/syntastic'
+Plug 'ervandew/supertab'
+Plug 'Townk/vim-autoclose'
+Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer'}
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-surround'
+Plug 'rking/ag.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'myusuf3/numbers.vim'
+Plug 'majutsushi/tagbar'
+Plug 'easymotion/vim-easymotion'
+Plug 'tpope/vim-unimpaired'
+
+call plug#end()
 
 set rtp+=~/.fzf
-
-call vundle#end()            " required
-filetype plugin indent on    " required
 
 "visual and format
 set t_Co=256

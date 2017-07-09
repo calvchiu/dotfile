@@ -31,13 +31,8 @@ mv 10-powerline-symbols.conf ~/.config/fontconfig/conf.d/
 #brew install fontconfig for fc-cache
 fc-cache -vf ~/.fonts/
 
-# plugin manager and plugin dependencies
-git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-~/.fzf/install --all
+# plugin manager & install plugins
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+vim -i NONE -c PlugInstall -c quitall
 
-# install plugin
-vim -i NONE -c VundleUpdate -c quitall
-~/.vim/bundle/YouCompleteMe/install.py --clang-completer
-
-## i3wm
