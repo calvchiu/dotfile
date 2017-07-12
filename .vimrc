@@ -23,6 +23,7 @@ Plug 'myusuf3/numbers.vim'
 Plug 'majutsushi/tagbar'
 Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-unimpaired'
+Plug 'vim-ruby/vim-ruby'
 
 call plug#end()
 

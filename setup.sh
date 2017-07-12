@@ -1,7 +1,7 @@
 #!/bin/bash -x
 
 sudo apt-get update
-sudo apt-get install curl git zsh vim tmux silversearcher-ag build-essential cmake python-dev python3-dev
+sudo apt-get install curl git zsh vim tmux silversearcher-ag build-essential cmake python-dev python3-dev xclip
 
 
 ## zsh
@@ -12,7 +12,7 @@ rm ~/.zshrc
 
 ## dotfile
 dir=~/dotfile
-dotfiles=".vimrc .tmux.conf .gitconfig .zshrc"
+dotfiles=".vimrc .tmux.conf .gitconfig .gitignore_global .zshrc"
 
 for file in $dotfiles; do
   echo "Symlink created for $file"

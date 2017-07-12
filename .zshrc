@@ -1,7 +1,7 @@
 # Path to oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
-export PATH=$PATH:/bin:/usr/bin:/usr/local/bin:/usr/local/sbin:/usr/sbin:/sbin
+export PATH=$PATH:/bin:/usr/bin:/usr/local/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin:~/.rvm/bin
 
 ZSH_THEME="bureau"
 
@@ -23,7 +23,8 @@ alias tx="tmux -2"
 alias tma="tmux attach -d -t"
 alias tmg="tmux new -s $(basename $(pwd))"
 alias :q="exit"
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+alias pbcopy="xclip -selection clipboard"
+alias pbpaste="xclip -selection clipboard -o"
 
 alias ag="ag --path-to-agignore ~/.agignore"
 

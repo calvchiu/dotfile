@@ -3,6 +3,7 @@
 	name = Calvin Chiu
 [core]
 	editor = vim
+	excludesfile = ~/.gitignore_global
 [alias]
 	lg = "log --pretty=format:'%C(yellow)%h %Cred%cr %Cblue%an%Cgreen%d %Creset%s' --date=short --graph"
 	lgs = "log --pretty=format:'%C(yellow)%h %Cred%ad %Cblue%an%Cgreen%d %Creset%s' --date=short"
