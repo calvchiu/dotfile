@@ -19,7 +19,7 @@ Plug 'tpope/vim-surround'
 Plug 'rking/ag.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'myusuf3/numbers.vim'
+Plug 'junegunn/goyo.vim'
 Plug 'majutsushi/tagbar'
 Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-unimpaired'
@@ -76,6 +76,10 @@ set foldlevel=1
 "syntax
 autocmd BufNewFile,BufReadPost *.ru set filetype=ruby
 
+"prose writing
+autocmd BufNewFile,BufRead *.md setlocal textwidth=80
+autocmd BufNewFile,BufRead *.md setlocal spell
+
 "leader mapping
 let mapleader = "\<Space>"
 "[optional] customize timeout(in milliseconds) for mapped keysequences
@@ -131,6 +135,21 @@ if executable('fzf')
     "let g:fzf_layout = {}
   let g:fzf_buffers_jump = 1
 end
+
+"goyo
+function! s:goyo_enter()
+  set nonumber
+  set norelativenumber
+endfunction
+
+function! s:goyo_leave()
+  set number
+  set relativenumber
+endfunction
+
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
+autocmd! User GoyoLeave nested call <SID>goyo_leave()
+let g:goyo_width = 85
 
 "gitgutter
 "let g:gitgutter_eager = 0
