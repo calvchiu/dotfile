@@ -1,7 +1,7 @@
 #!/bin/bash -x
 
-sudo apt-get update
-sudo apt-get install curl git zsh vim tmux silversearcher-ag build-essential cmake python-dev python3-dev xclip
+sudo apt update
+sudo apt install curl git zsh vim-gnome tmux silversearcher-ag build-essential cmake python-dev python3-dev xclip default-jdk default-jre maven
 
 
 ## zsh

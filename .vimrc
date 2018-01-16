@@ -24,6 +24,7 @@ Plug 'majutsushi/tagbar'
 Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-ruby/vim-ruby'
+Plug 'artur-shaik/vim-javacomplete2'
 
 call plug#end()
 
@@ -108,6 +109,9 @@ nnoremap <leader>h :bprevious<CR>
 "ctags
 "set autochdir
 set tags=tags;,./tags
+
+"vim-javacomplete2
+autocmd FileType java setlocal omnifunc=javacomplete#Complete
 
 "fzf.vim
 "let g:fzf_layout = { 'right': '~40%' }

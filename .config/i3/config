@@ -144,7 +144,7 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # Start i3bar to display a workspace bar
-# depdendency: i3blocks
+# depedendency: i3blocks
 bar {
         status_command i3blocks -c ~/.config/i3blocks/i3blocks.conf
         tray_output primary
