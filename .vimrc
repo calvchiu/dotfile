@@ -67,7 +67,7 @@ set breakindent
 set showbreak=¬
 set hidden
 set autoread
-set clipboard=unnamedplus
+set clipboard=unnamed,unnamedplus
 set nowrap
 set foldenable
 set foldmethod=indent
