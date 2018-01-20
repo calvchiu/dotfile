@@ -16,7 +16,7 @@ Plug 'Townk/vim-autoclose'
 Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer'}
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-surround'
-Plug 'rking/ag.vim'
+"Plug 'rking/ag.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'

@@ -26,7 +26,7 @@ alias :q="exit"
 alias pbcopy="xclip -selection clipboard"
 alias pbpaste="xclip -selection clipboard -o"
 
-alias ag="ag --path-to-agignore ~/.agignore"
+alias ag="ag --path-to-ignore ~/.agignore"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
