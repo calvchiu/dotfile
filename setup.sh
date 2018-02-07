@@ -3,6 +3,7 @@
 sudo apt update
 sudo apt install curl git zsh vim-gnome tmux silversearcher-ag build-essential cmake python-dev python3-dev xclip default-jdk default-jre maven
 
+sudo apt install i3 i3blocks rofi feh
 
 ## zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
@@ -19,6 +20,10 @@ for file in $dotfiles; do
   ln -s $dir/$file ~/$file
 done
 
+# i3 configs
+mkdir -p ~/.config/{i3,i3blocks}
+ln -s $dir/.config/i3/config ~/.config/i3/config
+ln -s $dir/.config/i3blocks/i3blocks.conf ~/.config/i3blocks/i3blocks.conf
 
 ## vim
 
