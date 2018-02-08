@@ -1,7 +1,7 @@
 #!/bin/bash -x
 
 sudo apt update
-sudo apt install curl git zsh vim-gnome tmux silversearcher-ag build-essential cmake python-dev python3-dev xclip default-jdk default-jre maven
+sudo apt install curl git zsh vim-gnome tmux silversearcher-ag build-essential cmake python-dev python3-dev xclip ffmpeg default-jdk default-jre maven
 
 sudo apt install i3 i3blocks rofi feh
 
