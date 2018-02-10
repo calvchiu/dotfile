@@ -24,6 +24,7 @@ done
 mkdir -p ~/.config/{i3,i3blocks}
 ln -s $dir/.config/i3/config ~/.config/i3/config
 ln -s $dir/.config/i3blocks/i3blocks.conf ~/.config/i3blocks/i3blocks.conf
+gsettings set org.gnome.desktop.background show-desktop-icons false
 
 ## vim
 
