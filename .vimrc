@@ -24,6 +24,7 @@ Plug 'majutsushi/tagbar'
 Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-ruby/vim-ruby'
+Plug 'w0rp/ale'
 Plug 'artur-shaik/vim-javacomplete2'
 
 call plug#end()
@@ -112,6 +113,9 @@ set tags=tags;,./tags
 
 "vim-javacomplete2
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
+
+"register window shortcut
+nnoremap <silent> "" :registers<CR>
 
 "fzf.vim
 "let g:fzf_layout = { 'right': '~40%' }
