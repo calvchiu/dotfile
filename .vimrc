@@ -413,3 +413,9 @@ if $TERM_PROGRAM =~ "iTerm"
   let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 endif" "
 
+" enable spell check for certain filetypes
+augroup setSpelling
+  autocmd!
+  autocmd FileType gitcommit setlocal spell spelllang=en_us
+  autocmd FileType markdown setlocal spell spelllang=en_us
+augroup END
