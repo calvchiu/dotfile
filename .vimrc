@@ -13,17 +13,32 @@ Plug 'tpope/vim-fugitive'
 "Plug 'scrooloose/syntastic'
 Plug 'ervandew/supertab'
 Plug 'Townk/vim-autoclose'
-Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer'}
+"Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer --ts-completer; cd third_party/ycmd && npm install -g --prefix third_party/tsserver typescript'} // removed
+"Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer'}
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-surround'
-Plug 'rking/ag.vim'
+"Plug 'rking/ag.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'majutsushi/tagbar'
-Plug 'easymotion/vim-easymotion'
+"Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-ruby/vim-ruby'
+Plug 'w0rp/ale'
+Plug 'Vimjas/vim-python-pep8-indent'
+Plug 'junegunn/vim-peekaboo'
+"Plug 'ternjs/tern_for_vim', {'do': 'npm install'}
+Plug 'iamcco/markdown-preview.vim'
+Plug 'hashivim/vim-terraform'
+Plug 'juliosueiras/vim-terraform-completion'
+Plug 'ludovicchabant/vim-gutentags'
+" Intellisense confugration
+" yarn dependency
+"Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+":CocInstall coc-tsserver coc-json coc-eslint coc-json coc-prettier coc-jest
+":CocConfig
 
 call plug#end()
 
@@ -66,15 +81,33 @@ set breakindent
 set showbreak=¬
 set hidden
 set autoread
-set clipboard=unnamedplus
+set clipboard=unnamed,unnamedplus
 set nowrap
 set foldenable
 set foldmethod=indent
 set foldlevel=1
+set lazyredraw
+set regexpengine=1
+" Better display for messages
+"set cmdheight=2
 
 
 "syntax
 autocmd BufNewFile,BufReadPost *.ru set filetype=ruby
+autocmd BufNewFile,BufReadPost Jenkinsfile set filetype=groovy
+autocmd BufNewFile,BufReadPost Dockerfile.* set filetype=dockerfile
+
+" format program for javascript
+" autocmd FileType javascript setlocal formatprg=prettier\ --stdin\ --single-quote\ --trailing-comma\ es5
+
+"python PEP8 indentation
+"https://realpython.com/blog/python/vim-and-python-a-match-made-in-heaven://realpython.com/blog/python/vim-and-python-a-match-made-in-heaven/
+autocmd BufNewFile,BufReadPost *.py set filetype=python |
+      \ set tabstop=4 |
+      \ set softtabstop=4 |
+      \ set shiftwidth=4 |
+      \ set expandtab |
+      \ set autoindent
 
 "prose writing
 autocmd BufNewFile,BufRead *.md setlocal textwidth=80
@@ -109,6 +142,24 @@ nnoremap <leader>h :bprevious<CR>
 "set autochdir
 set tags=tags;,./tags
 
+"vim-javacomplete2
+autocmd FileType java setlocal omnifunc=javacomplete#Complete
+autocmd FileType java JCEnable
+
+"ale
+let g:ale_linters = {
+      \  'java': ['checkstyle'],
+      \  'bash': ['shellcheck']
+      \ }
+
+      "  'javascript': ['eslint'],
+let g:ale_fixers = {
+      \ }
+
+      "  'javascript': ['prettier']
+"register window shortcut
+nnoremap <silent> "" :registers<CR>
+
 "fzf.vim
 "let g:fzf_layout = { 'right': '~40%' }
 let g:fzf_colors =
@@ -127,13 +178,57 @@ let g:fzf_colors =
 
 if executable('fzf')
   "let $FZF_DEFAULT_COMMAND = 'ag -l -g --ignore=tags ""'
+  "http://owen.cymru/fzf-ripgrep-navigate-with-bash-faster-than-ever-before/
+  let $FZF_DEFAULT_COMMAND = 'rg --files --hidden
+        \ --follow
+        \ --colors line:fg:yellow
+        \ --colors line:style:bold
+        \ --colors path:fg:green
+        \ --colors path:style:bold
+        \ --colors match:fg:black
+        \ --colors match:bg:yellow
+        \ --colors match:style:nobold
+        \ -g "!{.git,node_modules}/*"
+        \ 2> /dev/null'
   nnoremap <c-p> :FZF -m<cr>
   nnoremap <leader>p :Buffers<cr>
-  nnoremap <leader>/ :Ag<cr>
   let g:fzf_layout = { 'down': '40%' }
     "fzf buggy with tmux
     "let g:fzf_layout = {}
   let g:fzf_buffers_jump = 1
+
+  nnoremap <leader>/ :Ag<cr>
+  " manually specify Ag colors
+  " https://github.com/junegunn/fzf.vim/pull/454#issuecomment-416801264
+  command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, { 'options': ['--color', 'hl:210,hl+:196'] }, <bang>0)
+
+  " 1. looks like there is still an issue with Rg + FZF. Running :Rg<cr> does
+  " then <C-c> does not close the buffer/session until Rg search has completed
+  " 2. Looks like 1. has been fixed but using :Rg uses bright blue for
+  " highlighting which is usable due to visibility. Sticking to Ag for now
+  " Example of color settings for Rg--colors "path:fg:190,220,255" --colors "line:fg:128,128,128"
+  "nnoremap <leader>/ :Rg<cr>
+  "command! -bang -nargs=* Rg
+  "      \ call fzf#vim#grep(
+  "      \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+  "      \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  "      \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  "      \   <bang>0)
+
+end
+
+" silversearcher
+if executable('ag')
+  " Note we extract the column as well as the file and line number
+  set grepprg=ag\ --nogroup\ --nocolor\ --column
+  set grepformat=%f:%l:%c%m
+endif"
+
+" ripgrep
+if executable('rg')
+  "set grepprg=rg\ --vimgrep
+  set grepprg=rg\ --vimgrep\ --no-heading
+  set grepformat=%f:%l:%c:%m,%f:%l:%m
 end
 
 "goyo
@@ -171,6 +266,10 @@ let g:tagbar_type_ruby = {
 
 "netrw
 let g:netrw_liststyle=3
+
+"gutentags
+"print TAGS in status line when gutentags is updating tag file
+set statusline+=%{gutentags#statusline()}
 
 "syntatic
 "set statusline+=%#warningmsg#
@@ -236,6 +335,15 @@ let NERDTreeChDirMode=2
 "autocmd VimEnter * NERDTree | wincmd p
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
+"YouCompleteMe
+let g:ycm_autoclose_preview_window_after_insertion = 1
+
+"vim-terraform
+"https://github.com/hashivim/vim-terraform#usage
+let g:terraform_align=1
+let g:terraform_fold_sections=1
+let g:terraform_fmt_on_save=0
+
 "get better at vim
 map <left>  <nop>
 map <down>  <nop>
@@ -285,7 +393,6 @@ inoremap {<CR> {<CR>}<C-o>O
 "removes trailing whitespace on :w
 autocmd BufWritePre * :%s/\s\+$//e
 
-
 " Open cursor at last position
 if has("autocmd")
 	autocmd BufReadPost *
@@ -306,8 +413,3 @@ if $TERM_PROGRAM =~ "iTerm"
   let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 endif" "
 
-if executable('ag')
-  " Note we extract the column as well as the file and line number
-  set grepprg=ag\ --nogroup\ --nocolor\ --column
-  set grepformat=%f:%l:%c%m
-endif"
