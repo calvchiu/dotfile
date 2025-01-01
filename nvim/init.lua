@@ -1,3 +1,59 @@
+-- leader key
+vim.g.mapleader = ' '
+
+-- bootstrap lazy.nvim
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+  if vim.v.shell_error ~= 0 then
+    vim.api.nvim_echo({
+      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+      { out, "WarningMsg" },
+      { "\nPress any key to exit..." },
+    }, true, {})
+    vim.fn.getchar()
+    os.exit(1)
+  end
+end
+vim.opt.rtp:prepend(lazypath)
+
+-- setup lazy.nvim
+require("lazy").setup({
+  spec = {
+    { "tpope/vim-fugitive" },
+    { "tpope/vim-rhubarb" },
+    { "tpope/vim-surround" },
+    { "tpope/vim-unimpaired" },
+    { "tpope/vim-projectionist" },
+    { "catppuccin/nvim" },
+    { "williamboman/mason.nvim" },
+    { "neovim/nvim-lspconfig" },
+    {
+      "nvim-treesitter/nvim-treesitter",
+      build = ":TSUpdate",
+    },
+    {
+      "echasnovski/mini.comment",
+      branch = "stable",
+    },
+    {
+      "wellle/targets.vim",
+      tag = "v0.5.0",
+    },
+    {
+      "j-hui/fidget.nvim",
+      commit = "0ba1e16d07627532b6cae915cc992ecac249fb97",
+    },
+  },
+  -- Configure any other settings here. See the documentation for more details.
+  -- colorscheme that will be used when installing plugins.
+  -- install = { colorscheme = { "habamax" } },
+  -- automatically check for plugin updates
+  checker = { enabled = false },
+})
+
+vim.opt.rtp:prepend(lazypath)
 -- general settings
 vim.opt.compatible = false
 vim.opt.incsearch = true
@@ -32,9 +88,6 @@ vim.opt.lazyredraw = true
 vim.opt.regexpengine = 1
 vim.opt.splitbelow = true
 vim.opt.splitright = true
-
--- leader key
-vim.g.mapleader = ' '
 
 -- key mappings
 vim.keymap.set('n', '<leader><leader>', ':nohlsearch<CR>')
