@@ -113,6 +113,37 @@ require("lazy").setup({
           "lua_ls",
         },
       },
+      config = function()
+        -- automatically set up LSP servers installed via mason.nvim
+        -- https://github.com/williamboman/mason-lspconfig.nvim/blob/e86a4c84ff35240639643ffed56ee1c4d55f538e/doc/mason-lspconfig.txt#L164-L197
+        require("mason").setup()
+        require("mason-lspconfig").setup()
+
+        require("mason-lspconfig").setup_handlers {
+          -- The first entry (without a key) will be the default handler
+          -- and will be called for each installed server that doesn't have
+          -- a dedicated handler.
+          function (server_name) -- default handler (optional)
+            require("lspconfig")[server_name].setup {}
+          end,
+          -- Next, you can provide a dedicated handler for specific servers.
+          -- For example, a handler override for the `lua_ls`:
+          ["lua_ls"] = function ()
+            local lspconfig = require('lspconfig')
+            lspconfig.lua_ls.setup {
+              settings = {
+                Lua = {
+                  diagnostics = {
+                    globals = {
+                      'vim',
+                    },
+                  },
+                },
+              },
+            }
+          end
+        }
+      end,
     },
     {
       "neovim/nvim-lspconfig",
@@ -120,6 +151,33 @@ require("lazy").setup({
         "mason.nvim",
         "williamboman/mason-lspconfig.nvim",
       },
+      config = function()
+        vim.api.nvim_create_autocmd("LspAttach", {
+          desc = "lsp keybindings",
+          callback = function(event)
+            local opts = { noremap = true, silent = true, buffer = event.buf }
+
+            -- vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+            vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+            vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+            vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+            vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+            vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
+            vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
+            vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
+            -- vim.keymap.set('n', '<space>wl', print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+            vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
+            vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
+            vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, opts)
+            vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+            vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
+            vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
+            vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+            vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
+            -- vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, opts)
+          end
+        })
+      end,
       -- make sure mason installs the server
       servers = {
         jdtls = {},

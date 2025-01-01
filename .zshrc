@@ -34,3 +34,6 @@ alias ag="ag --path-to-agignore ~/.agignore"
 # z jumping
 . /opt/homebrew/etc/profile.d/z.sh
 
+
+# java
+export PATH="/opt/homebrew/opt/openjdk@17/bin:$PATH"
