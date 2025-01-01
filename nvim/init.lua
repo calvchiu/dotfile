@@ -26,12 +26,175 @@ require("lazy").setup({
     { "tpope/vim-surround" },
     { "tpope/vim-unimpaired" },
     { "tpope/vim-projectionist" },
-    { "catppuccin/nvim" },
-    { "williamboman/mason.nvim" },
-    { "neovim/nvim-lspconfig" },
+    {
+      "catppuccin/nvim",
+      name = "catppuccin",
+      priority = 1000,
+      opts = {
+        integrations = {
+          aerial = true,
+          alpha = true,
+          cmp = true,
+          dashboard = true,
+          flash = true,
+          fzf = true,
+          grug_far = true,
+          gitsigns = true,
+          headlines = true,
+          illuminate = true,
+          indent_blankline = { enabled = true },
+          leap = true,
+          lsp_trouble = true,
+          mason = true,
+          markdown = true,
+          mini = true,
+          native_lsp = {
+            enabled = true,
+            underlines = {
+              errors = { "undercurl" },
+              hints = { "undercurl" },
+              warnings = { "undercurl" },
+              information = { "undercurl" },
+            },
+          },
+          navic = { enabled = true, custom_bg = "lualine" },
+          neotest = true,
+          neotree = true,
+          noice = true,
+          notify = true,
+          semantic_tokens = true,
+          snacks = true,
+          telescope = true,
+          treesitter = true,
+          treesitter_context = true,
+          which_key = true,
+        },
+      },
+    },
+    {
+      "lewis6991/gitsigns.nvim",
+      opts = {
+        signs = {
+          add          = { text = '┃' },
+          change       = { text = '┃' },
+          delete       = { text = '_' },
+          topdelete    = { text = '‾' },
+          changedelete = { text = '~' },
+          untracked    = { text = '┆' },
+        },
+        signs_staged = {
+          add          = { text = '┃' },
+          change       = { text = '┃' },
+          delete       = { text = '_' },
+          topdelete    = { text = '‾' },
+          changedelete = { text = '~' },
+          untracked    = { text = '┆' },
+        },
+        current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
+        current_line_blame_formatter = '<author>, <author_time:%R> - <summary>',
+      },
+    },
+    {
+      "williamboman/mason.nvim",
+      opts = {
+        ensure_installed = {
+        },
+      },
+    },
+    {
+      "williamboman/mason-lspconfig.nvim",
+      dependencies = {
+        "mason.nvim",
+      },
+      opts = {
+        ensure_installed = {
+          "jdtls",
+          "gopls",
+          "lua_ls",
+        },
+      },
+    },
+    {
+      "neovim/nvim-lspconfig",
+      dependencies = {
+        "mason.nvim",
+        "williamboman/mason-lspconfig.nvim",
+      },
+      -- make sure mason installs the server
+      servers = {
+        jdtls = {},
+        gopls = {
+          settings = {
+            gopls = {
+              gofumpt = true,
+              codelenses = {
+                gc_details = false,
+                generate = true,
+                regenerate_cgo = true,
+                run_govulncheck = true,
+                test = true,
+                tidy = true,
+                upgrade_dependency = true,
+                vendor = true,
+              },
+              hints = {
+                assignVariableTypes = true,
+                compositeLiteralFields = true,
+                compositeLiteralTypes = true,
+                constantValues = true,
+                functionTypeParameters = true,
+                parameterNames = true,
+                rangeVariableTypes = true,
+              },
+              analyses = {
+                fieldalignment = true,
+                nilness = true,
+                unusedparams = true,
+                unusedwrite = true,
+                useany = true,
+              },
+              usePlaceholders = true,
+              completeUnimported = true,
+              staticcheck = true,
+              directoryFilters = { "-.git", "-.vscode", "-.idea", "-.vscode-test", "-node_modules" },
+              semanticTokens = true,
+            },
+          },
+        },
+      },
+      setup = {
+        jdtls = function()
+          return true -- avoid duplicate servers
+        end,
+      },
+    },
     {
       "nvim-treesitter/nvim-treesitter",
       build = ":TSUpdate",
+      config = function() 
+        local configs = require("nvim-treesitter.configs")
+        configs.setup({
+          ensure_installed = {
+            "go",
+            "javascript",
+            "ruby",
+            "json",
+            "java",
+            "lua",
+            "sql",
+            "typescript",
+          },
+          sync_install = false,
+          auto_install = false,
+          highlight = {
+            enable = true,
+            additional_vim_regex_highlighting = false,
+          },
+          indent = {
+            enable = true
+          },
+        })
+      end,
     },
     {
       "echasnovski/mini.comment",
@@ -48,12 +211,16 @@ require("lazy").setup({
   },
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.
-  -- install = { colorscheme = { "habamax" } },
+  install = { colorscheme = { "catppuccin" } },
   -- automatically check for plugin updates
   checker = { enabled = false },
 })
 
 vim.opt.rtp:prepend(lazypath)
+
+-- color scheme
+vim.cmd.colorscheme("catppuccin")
+
 -- general settings
 vim.opt.compatible = false
 vim.opt.incsearch = true
