@@ -1,10 +1,5 @@
+-- general settings
 vim.opt.compatible = false
-vim.cmd('filetype off')
-
--- General Settings
-vim.opt.background = 'dark'
-vim.opt.encoding = 'utf-8'
-vim.opt.guifont = 'Inconsolata for Powerline:h12'
 vim.opt.incsearch = true
 vim.opt.mouse = 'a'
 vim.opt.laststatus = 2
@@ -35,14 +30,32 @@ vim.opt.foldmethod = 'indent'
 vim.opt.foldlevel = 1
 vim.opt.lazyredraw = true
 vim.opt.regexpengine = 1
+vim.opt.splitbelow = true
+vim.opt.splitright = true
 
--- Leader Key
+-- leader key
 vim.g.mapleader = ' '
 
--- Key Mappings
+-- key mappings
 vim.keymap.set('n', '<leader><leader>', ':nohlsearch<CR>')
 vim.keymap.set('n', '<leader>r', ':source $MYVIMRC<CR>')
 vim.keymap.set('n', '<leader>n', ':NERDTreeToggle<CR>')
 vim.keymap.set('n', '<leader>J', ':%!python -m json.tool<CR>')
 vim.keymap.set('i', 'jj', '<ESC>')
 vim.keymap.set('i', 'jk', '<ESC>')
+
+-- butterfingers commands
+vim.cmd('command! W w')
+vim.cmd('command! Q q')
+vim.cmd('command! Wq wq')
+vim.cmd('command! WQ wq')
+
+-- buffer management
+vim.keymap.set('n', '<leader>l', ':bnext<CR>')
+vim.keymap.set('n', '<leader>h', ':bprevious<CR>')
+
+-- get better at vim
+vim.keymap.set('', '<Left>', '<Nop>')
+vim.keymap.set('', '<Down>', '<Nop>')
+vim.keymap.set('', '<Up>', '<Nop>')
+vim.keymap.set('', '<Right>', '<Nop>')
