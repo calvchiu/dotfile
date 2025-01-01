@@ -25,8 +25,12 @@ alias tmg="tmux new -s $(basename $(pwd))"
 alias :q="exit"
 alias pbcopy="xclip -selection clipboard"
 alias pbpaste="xclip -selection clipboard -o"
+alias vim="nvim"
 
 alias ag="ag --path-to-agignore ~/.agignore"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# z jumping
+. /opt/homebrew/etc/profile.d/z.sh
 
